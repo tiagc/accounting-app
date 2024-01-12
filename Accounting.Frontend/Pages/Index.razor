@@ -1,0 +1,57 @@
+﻿@page "/"
+@using Accounting.Backend.Database
+
+<h3>Customers</h3>
+
+@if (customers == null)
+{
+    <p>Loading...</p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Customer ID</th>
+                <th>Customer Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var customer in customers)
+            {
+                <tr>
+                    <td>@customer.Id</td>
+                    <td>@customer.CustomerName</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+<input type="text" @bind="inputValue" />
+<button @onclick="CreateCustomer">Create Customer</button>
+
+@code {
+    private string inputValue;
+    private List<Customer> customers;
+
+    [Inject]
+    public HttpClient HttpClient { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        customers = await HttpClient.GetFromJsonAsync<List<Customer>>("https://localhost:7093/Accounting/customer");
+    }
+
+    private async Task CreateCustomer()
+    {
+        // Assume you have a property called "newCustomerName" for the new customer name
+        var newCustomerName = inputValue;
+        var response = await HttpClient.PostAsync($"https://localhost:7093/Accounting/customer?customerName={newCustomerName}", null);
+    if (response.IsSuccessStatusCode)
+        {
+            // Refresh the customer list after creating a new customer
+            customers = await HttpClient.GetFromJsonAsync<List<Customer>>("https://localhost:7093/Accounting/customer");
+    }
+    }
+}
