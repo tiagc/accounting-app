@@ -1,4 +1,4 @@
-using Accounting.Backend.Database;
+using BookApp.Backend.Database;
 using Microsoft.EntityFrameworkCore;
 using System.Text.Json.Serialization;
 

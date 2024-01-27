@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34322.80
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Accounting.Frontend", "Accounting.Frontend\Accounting.Frontend.csproj", "{49F27897-768A-46F7-8DF1-980A7F22B9CD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Book.Frontend", "Accounting.Frontend\Book.Frontend.csproj", "{49F27897-768A-46F7-8DF1-980A7F22B9CD}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Accounting.Backend", "Accounting.Backend\Accounting.Backend.csproj", "{1B5754CB-37C1-4D17-B038-6CCC064C0A69}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Book.Backend", "Accounting.Backend\Book.Backend.csproj", "{1B5754CB-37C1-4D17-B038-6CCC064C0A69}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Accounting.Common", "Accounting.Common\Accounting.Common.csproj", "{5C3CC6BC-77B5-4A86-B7DB-7D879910E1B0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Book.Common", "Accounting.Common\Book.Common.csproj", "{5C3CC6BC-77B5-4A86-B7DB-7D879910E1B0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

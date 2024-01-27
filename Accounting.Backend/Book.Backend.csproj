@@ -17,7 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Accounting.Common\Accounting.Common.csproj" />
+    <ProjectReference Include="..\Accounting.Common\Book.Common.csproj" />
   </ItemGroup>
 
 </Project>

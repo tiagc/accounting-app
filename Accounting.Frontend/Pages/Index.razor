@@ -1,9 +1,9 @@
 ﻿@page "/"
-@using Accounting.Backend.Database
+@using BookApp.Backend.Database
 
-<h3>Customers</h3>
+<h3>Book</h3>
 
-@if (customers == null)
+@if (Books == null)
 {
     <p>Loading...</p>
 }
@@ -12,46 +12,17 @@ else
     <table class="table">
         <thead>
             <tr>
-                <th>Customer ID</th>
-                <th>Customer Name</th>
+                <th>Book ID</th>
+                <th>Book Name</th>
                 <th>Bills</th>
             </tr>
         </thead>
         <tbody>
-            @foreach (var customer in customers)
+            @foreach (var Book in Books)
             {
                 <tr>
-                    <td>@customer.Id</td>
-                    <td>@customer.CustomerName</td>
-
-                    <td>
-                    @foreach (var bill in customer.Bills)
-                    {
-                        <p>
-                            <span>
-                                @bill.Id
-                            </span>
-
-                            @if (bill.BillType == BillType.Taxes)
-                            {
-                                <span> Taxes</span>
-                            }
-                            else
-                            {
-                                <span> Private</span>
-                            }
-
-                            @if (bill.BillStatus == BillStatus.Paid)
-                            {
-                                <span> Paid</span>
-                            }
-                            else
-                            {
-                                <span> Unpaid</span>
-                            }
-                        </p>
-                    }
-                    </td>
+                    <td>@Book.Id</td>
+                    <td>@Book.BookName</td>
                 </tr>
 
             }
@@ -60,29 +31,29 @@ else
 }
 
 <input type="text" @bind="inputValue" />
-<button @onclick="CreateCustomer">Create Customer</button>
+<button @onclick="CreateBook">Create Book</button>
 
 @code {
     private string inputValue;
-    private List<Customer> customers;
+    private List<Book> books;
 
     [Inject]
     public HttpClient HttpClient { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
-        customers = await HttpClient.GetFromJsonAsync<List<Customer>>("https://accounting-app-backend.azurewebsites.net/Accounting/customer");
+        books = await HttpClient.GetFromJsonAsync<List<Book>>("https://accounting-app-backend.azurewebsites.net/Accounting/customer");
     }
 
-    private async Task CreateCustomer()
+    private async Task CreateBook()
     {
-        // Assume you have a property called "newCustomerName" for the new customer name
-        var newCustomerName = inputValue;
-        var response = await HttpClient.PostAsync($"https://accounting-app-backend.azurewebsites.net/Accounting/customer?customerName={newCustomerName}", null);
+        // Assume you have a property called "newBookName" for the new book name
+        var newBookName = inputValue;
+        var response = await HttpClient.PostAsync($"https://accounting-app-backend.azurewebsites.net/Accounting/Book?BookName={newBookName}", null);
     if (response.IsSuccessStatusCode)
         {
-            // Refresh the customer list after creating a new customer
-            customers = await HttpClient.GetFromJsonAsync<List<Customer>>("https://accounting-app-backend.azurewebsites.net/Accounting/customer");
+            // Refresh the Book list after creating a new Book
+            Books = await HttpClient.GetFromJsonAsync<List<Book>>("https://accounting-app-backend.azurewebsites.net/Accounting/Book");
     }
     }
 }
